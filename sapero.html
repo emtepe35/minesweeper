@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAPER</title>
+</head>
+
+<body>
+    <div id="options">
+        Width : <input type="number" name="width" value=10 min="2"></input><br></br>
+        Height: <input type="number" name="height" value=10 min="2"></input><br></br>
+        Mines : <input type="number" name="mines" value=10 min="1" max="99"></input><br></br>
+    </div>
+    <button id="start_btn">GENERUJ</button>
+    <button id="back_btn">COFNIJ</button>
+    <div id="saper">
+        <div id="outline">
+            <div id="utils">
+                <div id="bmb"></div>
+                <div id="emoji">
+                    <img id="glasses" src="images/glasses.png" width="50px"></img>
+                    <img id="dead" src="images/dead.png" width="50px"></img>
+                    <img id="wow" src="images/wow.png" width="50px"></img>
+                    <img id="calm" src="images/calm.png" width="50px"></img>
+                </div>
+                <div id="time"></div>
+            </div>
+            <div id="game"></div>
+        </div>
+        <div id="leaderboard">
+            <div>
+                <div id="mode-select">
+                    <select name="mode" id="mode-list">
+
+                    </select>
+                </div>
+                <div id="btn"></div>
+            </div>
+            <div id="list"></div>
+        </div>
+        <div id="info">
+            <div id="info2"></div>
+            <div id="infobtn"><input type="text" id="pname"><input type="submit" id="namebutton"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+    #back_btn {
+        display: none;
+        float: left;
+        margin-left: 10px;
+    }
+
+    #start_btn {
+        float: left;
+    }
+
+    td {
+        padding: 0;
+        border: 2px solid rgb(80, 80, 80);
+    }
+
+    .game-block {
+        margin-left: -2px;
+        margin-top: -2px;
+        background-size: 32px;
+        cursor: pointer;
+        text-align: center;
+        line-height: 140%;
+        font-size: 24px;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bolder;
+    }
+
+    #game {
+        position: relative;
+        margin: 10px;
+        float: left;
+        margin-top: 10px;
+        border-left: 5px solid rgb(128, 128, 128);
+        border-top: 5px solid rgb(128, 128, 128);
+        border-bottom: 5px solid white;
+        border-right: 5px solid white;
+    }
+
+    #outline {
+        float: left;
+        display: none;
+        background-color: rgb(198, 198, 198);
+        border: 5px solid rgb(128, 128, 128);
+        border-left: 5px solid white;
+        border-top: 5px solid white;
+        width: 350px;
+        height: 480px;
+        left: 50px;
+        top: 100px;
+    }
+
+    #saper {
+        display: none;
+        position: absolute;
+        left: 50px;
+        top: 50px;
+    }
+
+    #leaderboard {
+        position: relative;
+        margin-left: 50px;
+        float: left;
+        background-color: rgb(198, 198, 198);
+        border: 5px solid rgb(128, 128, 128);
+        border-left: 5px solid white;
+        border-top: 5px solid white;
+        width: 350px;
+        height: 480px;
+    }
+
+    #utils {
+        width: 320px;
+        height: 100px;
+        margin: 10px;
+        margin-bottom: 0;
+        border-left: 5px solid rgb(128, 128, 128);
+        border-top: 5px solid rgb(128, 128, 128);
+        border-bottom: 5px solid white;
+        border-right: 5px solid white;
+    }
+
+    #time {
+        float: right;
+        background-color: black;
+        font-size: 44px;
+        width: 105px;
+        height: 50px;
+        line-height: 100%;
+        text-align: center;
+        padding: 5px;
+        margin: 5px;
+        margin-top: 15px;
+        margin-left: 0px;
+        margin-bottom: 0px;
+        border-left: 3px solid rgb(128, 128, 128);
+        border-top: 3px solid rgb(128, 128, 128);
+        border-bottom: 3px solid white;
+        border-right: 3px solid white;
+    }
+
+    #bmb {
+        float: left;
+        background-color: black;
+        margin: 5px;
+        width: 105px;
+        height: 50px;
+        font-size: 44px;
+        margin-top: 15px;
+        margin-right: 0px;
+        line-height: 100%;
+        text-align: center;
+        padding: 5px;
+        margin-bottom: 0px;
+        border-left: 3px solid rgb(128, 128, 128);
+        border-top: 3px solid rgb(128, 128, 128);
+        border-bottom: 3px solid white;
+        border-right: 3px solid white;
+    }
+
+    #info {
+        position: absolute;
+        left: 200px;
+        top: -50px;
+        background-color: rgb(198, 198, 198);
+        border: 5px solid rgb(128, 128, 128);
+        border-left: 5px solid white;
+        border-top: 5px solid white;
+        width: 350px;
+        height: 100px;
+        display: none;
+        font-size: 28px;
+        text-align: center;
+    }
+
+    #btn {
+        background-color: rgb(198, 198, 198);
+        border: 5px solid rgb(128, 128, 128);
+        border-left: 5px solid white;
+        border-top: 5px solid white;
+        width: 10px;
+        height: 10px;
+        float: left;
+        margin-left: 250px;
+        margin-top: -25px;
+        cursor: pointer;
+    }
+
+    #btn:hover {
+        background-color: grey;
+        border: 5px solid rgb(68, 68, 68);
+        border-left: 5px solid rgb(128, 128, 128);
+        border-top: 5px solid rgb(128, 128, 128);
+    }
+
+    #infobtn {
+        display: none;
+    }
+
+    #emoji {
+        float: left;
+        margin-left: 10px;
+        margin-top: 25px;
+        height: 50px;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    #glasses {
+        display: none;
+        cursor: pointer;
+    }
+
+    #mode-list {
+        width: 120px;
+        height: 30px;
+        margin-left: 110px;
+        margin-top: 5px;
+        text-align: center;
+        border-left: 3px solid rgb(128, 128, 128);
+        border-top: 3px solid rgb(128, 128, 128);
+        border-bottom: 3px solid white;
+        border-right: 3px solid white;
+    }
+
+    #dead {
+        display: none;
+        cursor: pointer;
+    }
+
+    #wow {
+        display: none;
+        cursor: pointer;
+    }
+
+    #calm {
+        cursor: pointer;
+    }
+
+    .score-row {
+        width: 330px;
+        margin: 5px;
+        height: 29px;
+        background-color: rgb(198, 198, 198);
+        border: 5px solid rgb(128, 128, 128);
+        border-left: 5px solid white;
+        border-top: 5px solid white;
+        text-align: center;
+        line-height: 150%;
+    }
+</style>
+
+</html>
